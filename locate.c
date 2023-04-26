@@ -1,7 +1,4 @@
 #include "shell.h"
-
-
-
 /**
  * get_location - Locates a command in the PATH.
  * @command: The command to locate.
@@ -28,22 +25,20 @@ char *get_location(char *command)
 		if (!temp)
 			return (NULL);
 
-        _str_cpy_(temp, dirs->directory_path);
-        _str_cat_(temp, "/");
-        _str_cat_(temp, command);
+		_str_cpy_(temp, dirs->directory_path);
+		_str_cat_(temp, "/");
+		_str_cat_(temp, command);
 
 		if (stat(temp, &st) == 0)
 		{
-            free_list_m(head);
+			free_list_m(head);
 			return (temp);
 		}
 
 		dirs = dirs->next;
 		free(temp);
 	}
-
-    free_list_m(head);
-
+	free_list_m(head);
 	return (NULL);
 }
 
@@ -73,6 +68,7 @@ char *fill_path_dir(char *path)
 		else
 			length++;
 	}
+
 	path_copy = malloc(sizeof(char) * (length + 1));
 	if (!path_copy)
 		return (NULL);
@@ -83,20 +79,20 @@ char *fill_path_dir(char *path)
 		{
 			if (i == 0)
 			{
-                _str_cat_(path_copy, pwd);
-                _str_cat_(path_copy, ":");
+				_str_cat_(path_copy, pwd);
+				_str_cat_(path_copy, ":");
 			}
 			else if (path[i + 1] == ':' || path[i + 1] == '\0')
 			{
-                _str_cat_(path_copy, ":");
-                _str_cat_(path_copy, pwd);
+				_str_cat_(path_copy, ":");
+				_str_cat_(path_copy, pwd);
 			}
 			else
-                _str_cat_(path_copy, ":");
+				_str_cat_(path_copy, ":");
 		}
 		else
 		{
-            _str_n_cat_(path_copy, &path[i], 1);
+			_str_n_cat_(path_copy, &path[i], 1);
 		}
 	}
 	return (path_copy);
@@ -127,7 +123,7 @@ list_t *get_path_dir(char *path)
 	{
 		if (add_node_end(&head, dirs[index]) == NULL)
 		{
-            free_list_m(head);
+			free_list_m(head);
 			free(dirs);
 			return (NULL);
 		}
