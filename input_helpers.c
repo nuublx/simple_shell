@@ -45,24 +45,19 @@ char *get_argmnts(char *line, int *exe_ret)
  */
 int call_argmnts(char **args, char **front, int *exe_ret)
 {
-	int ret, index, flag = -1;
+	int ret, index;
 
 	if (!args[0])
 		return (*exe_ret);
 	for (index = 0; args[index]; index++)
 	{
+
 		if (_str_n_cmp_(args[index], "||", 2) == 0)
-			flag = 0;
-
-		else if (_str_n_cmp_(args[index], "&&", 2) == 0)
-			flag = 1;
-
-		free(args[index]);
-		args[index] = NULL;
-		args = replaceAliases(args);
-		ret = run_argmnts(args, front, exe_ret);
-		if (flag == 0)
-		{
+		{	
+			free(args[index]);
+			args[index] = NULL;
+			args = replaceAliases(args);
+			ret = run_argmnts(args, front, exe_ret);
 			if (*exe_ret != 0)
 			{
 				args = &args[++index];
@@ -75,8 +70,12 @@ int call_argmnts(char **args, char **front, int *exe_ret)
 				return (ret);
 			}
 		}
-		else if (flag == 1)
+		else if (_str_n_cmp_(args[index], "&&", 2) == 0)
 		{
+			free(args[index]);
+			args[index] = NULL;
+			args = replaceAliases(args);
+			ret = run_argmnts(args, front, exe_ret);
 			if (*exe_ret == 0)
 			{
 				args = &args[++index];
