@@ -37,8 +37,9 @@ int shellby_env(char **args, char __attribute__((__unused__)) **front)
  * shellby_setenv - Changes or adds an environmental variable to the PATH.
  * @args: An array of arguments passed to the shell.
  * @front: A double pointer to the beginning of args.
- * Description: args[1] is the globalProgramName of the new or existing PATH variable.
- *              args[2] is the value to set the new or changed variable to.
+ * Description: args[1] is the globalProgramName of the new
+ * or existing PATH variable.
+ * args[2] is the value to set the new or changed variable to.
  *
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
@@ -55,9 +56,9 @@ int shellby_setenv(char **args, char __attribute__((__unused__)) **front)
 	new_value = malloc(_str_len_(args[0]) + 1 + _str_len_(args[1]) + 1);
 	if (!new_value)
 		return (make_error(args, -1));
-    _str_cpy_(new_value, args[0]);
-    _str_cat_(new_value, "=");
-    _str_cat_(new_value, args[1]);
+	_str_cpy_(new_value, args[0]);
+	_str_cat_(new_value, "=");
+	_str_cat_(new_value, args[1]);
 
 	env_var = _getenv(args[0]);
 	if (env_var)

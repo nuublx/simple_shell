@@ -53,7 +53,8 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 }
 
 /**
- * set_alias - Will either set an existing alias 'globalProgramName' with a new value,
+ * set_alias - Will either set an existing alias
+ * 'globalProgramName' with a new value,
  * 'value' or creates a new alias with 'globalProgramName' and 'value'.
  * @var_name: Name of the alias.
  * @value: Value of the alias. First character is a '='.
@@ -102,10 +103,10 @@ void print_alias(alias_t *alias)
 	alias_string = malloc(sizeof(char) * (len + 1));
 	if (!alias_string)
 		return;
-    _str_cpy_(alias_string, alias->name);
-    _str_cat_(alias_string, "='");
-    _str_cat_(alias_string, alias->value);
-    _str_cat_(alias_string, "'\n");
+	_str_cpy_(alias_string, alias->name);
+	_str_cat_(alias_string, "='");
+	_str_cat_(alias_string, alias->value);
+	_str_cat_(alias_string, "'\n");
 
 	write(STDOUT_FILENO, alias_string, len);
 	free(alias_string);
@@ -135,10 +136,10 @@ char **replaceAliases(char **args)
 				new_value = malloc(sizeof(char) * (_str_len_(temp->value) + 1));
 				if (!new_value)
 				{
-                    free_argmnts(args, args);
+					free_argmnts(args, args);
 					return (NULL);
 				}
-                _str_cpy_(new_value, temp->value);
+				_str_cpy_(new_value, temp->value);
 				free(args[i]);
 				args[i] = new_value;
 				i--;

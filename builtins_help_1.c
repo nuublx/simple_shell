@@ -32,7 +32,8 @@ void helpAlias(void)
 	write(STDOUT_FILENO, msg, _str_len_(msg));
 	msg = "\n\talias: Prints a list of all alias_list, one per line, in ";
 	write(STDOUT_FILENO, msg, _str_len_(msg));
-	msg = "the format NAME='VALUE'.\n\talias globalProgramName [name2 ...]:prints";
+	msg =
+		"the format NAME='VALUE'.\n\talias globalProgramName [name2 ...]:prints";
 	write(STDOUT_FILENO, msg, _str_len_(msg));
 	msg = " the alias_list globalProgramName, name2, etc. one per line, in the ";
 	write(STDOUT_FILENO, msg, _str_len_(msg));

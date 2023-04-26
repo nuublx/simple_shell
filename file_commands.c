@@ -20,7 +20,10 @@ int cant_open(char *file_path)
 	if (!hist_str)
 		return (127);
 
-	len = _str_len_(globalProgramName) + _str_len_(hist_str) + _str_len_(file_path) + 16;
+	len = _str_len_(globalProgramName) +
+		_str_len_(hist_str) +
+		_str_len_(file_path) + 16;
+
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -28,12 +31,12 @@ int cant_open(char *file_path)
 		return (127);
 	}
 
-    _str_cpy_(error, globalProgramName);
-    _str_cat_(error, ": ");
-    _str_cat_(error, hist_str);
-    _str_cat_(error, ": Can't open ");
-    _str_cat_(error, file_path);
-    _str_cat_(error, "\n");
+	_str_cpy_(error, globalProgramName);
+	_str_cat_(error, ": ");
+	_str_cat_(error, hist_str);
+	_str_cat_(error, ": Can't open ");
+	_str_cat_(error, file_path);
+	_str_cat_(error, "\n");
 
 	free(hist_str);
 	write(STDERR_FILENO, error, len);
@@ -60,7 +63,7 @@ int procFileCommands(char *file_path, int *exe_ret)
 	char buffer[120];
 	int ret;
 
-    historyCounter = 0;
+	historyCounter = 0;
 	file = open(file_path, O_RDONLY);
 	if (file == -1)
 	{
@@ -77,7 +80,7 @@ int procFileCommands(char *file_path, int *exe_ret)
 		buffer[b_read] = '\0';
 		line_size += b_read;
 		line = _realloc_(line, old_size, line_size);
-        _str_cat_(line, buffer);
+		_str_cat_(line, buffer);
 		old_size = line_size;
 	} while (b_read);
 	for (i = 0; line[i] == '\n'; i++)
@@ -91,8 +94,8 @@ int procFileCommands(char *file_path, int *exe_ret)
 				line[i] = ' ';
 		}
 	}
-    replace_variable(&line, exe_ret);
-    handle_line_entered(&line, line_size);
+	replace_variable(&line, exe_ret);
+	handle_line_entered(&line, line_size);
 	args = _strtok_(line, " ");
 	free(line);
 	if (!args)
@@ -100,7 +103,7 @@ int procFileCommands(char *file_path, int *exe_ret)
 	if (check_argmnts(args) != 0)
 	{
 		*exe_ret = 2;
-        free_argmnts(args, args);
+		free_argmnts(args, args);
 		return (*exe_ret);
 	}
 	front = args;

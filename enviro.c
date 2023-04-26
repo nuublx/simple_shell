@@ -34,7 +34,7 @@ char **_copyenv(void)
 			free(new_environ);
 			return (NULL);
 		}
-        _str_cpy_(new_environ[index], environ[index]);
+		_str_cpy_(new_environ[index], environ[index]);
 	}
 	new_environ[index] = NULL;
 

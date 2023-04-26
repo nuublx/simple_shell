@@ -18,7 +18,10 @@ char *error_126(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	len = _str_len_(globalProgramName) + _str_len_(hist_str) + _str_len_(args[0]) + 24;
+	len = _str_len_(globalProgramName) +
+		_str_len_(hist_str) +
+		_str_len_(args[0]) + 24;
+
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -26,12 +29,12 @@ char *error_126(char **args)
 		return (NULL);
 	}
 
-    _str_cpy_(error, globalProgramName);
-    _str_cat_(error, ": ");
-    _str_cat_(error, hist_str);
-    _str_cat_(error, ": ");
-    _str_cat_(error, args[0]);
-    _str_cat_(error, ": Permission denied\n");
+	_str_cpy_(error, globalProgramName);
+	_str_cat_(error, ": ");
+	_str_cat_(error, hist_str);
+	_str_cat_(error, ": ");
+	_str_cat_(error, args[0]);
+	_str_cat_(error, ": Permission denied\n");
 
 	free(hist_str);
 	return (error);
@@ -52,7 +55,10 @@ char *error_127(char **args)
 	if (!hist_str)
 		return (NULL);
 
-	len = _str_len_(globalProgramName) + _str_len_(hist_str) + _str_len_(args[0]) + 16;
+	len = _str_len_(globalProgramName) +
+		_str_len_(hist_str) +
+		_str_len_(args[0]) + 16;
+
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
@@ -60,12 +66,12 @@ char *error_127(char **args)
 		return (NULL);
 	}
 
-    _str_cpy_(error, globalProgramName);
-    _str_cat_(error, ": ");
-    _str_cat_(error, hist_str);
-    _str_cat_(error, ": ");
-    _str_cat_(error, args[0]);
-    _str_cat_(error, ": not found\n");
+	_str_cpy_(error, globalProgramName);
+	_str_cat_(error, ": ");
+	_str_cat_(error, hist_str);
+	_str_cat_(error, ": ");
+	_str_cat_(error, args[0]);
+	_str_cat_(error, ": not found\n");
 
 	free(hist_str);
 	return (error);
