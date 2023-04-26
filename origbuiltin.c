@@ -6,7 +6,7 @@ int shellby_help(char **args, char __attribute__((__unused__)) **front);
 
 /**
  * get_builtin - Matches a command with a corresponding
- *               shellby builtin function.
+ * shellby builtin function.
  * @command: The command to match.
  *
  * Return: A function pointer to the corresponding builtin.
@@ -35,13 +35,13 @@ int (*get_builtin(char *command))(char **args, char **front)
 
 /**
  * shellby_exit - Causes normal process termination
- *                for the shellby shell.
+ * for the shellby shell.
  * @args: An array of arguments containing the exit value.
  * @front: A double pointer to the beginning of args.
  *
  * Return: If there are no arguments - -3.
- *         If the given exit value is invalid - 2.
- *         O/w - exits with the given status value.
+ * If the given exit value is invalid - 2.
+ * O/w - exits with the given status value.
  *
  * Description: Upon returning -3, the program exits back in the main function.
  */
@@ -72,7 +72,7 @@ int shellby_exit(char **args, char **front)
 	if (num > max - 1)
 		return (make_error(--args, 2));
 	args -= 1;
-    free_argmnts(args, front);
+	free_argmnts(args, front);
 	free_env();
 	free_alias_list(alias_list);
 	exit(num);
@@ -170,23 +170,24 @@ int shellby_cd(char **args, char __attribute__((__unused__)) **front)
 int shellby_help(char **args, char __attribute__((__unused__)) **front)
 {
 	if (!args[0])
-        helpAll();
+	helpAll();
 	else if (_str_cmp_(args[0], "alias") == 0)
-        helpAlias();
+	helpAlias();
 	else if (_str_cmp_(args[0], "cd") == 0)
-        helpCd();
+	helpCd();
 	else if (_str_cmp_(args[0], "exit") == 0)
-        helpExit();
+	helpExit();
 	else if (_str_cmp_(args[0], "env") == 0)
-        helpEnv();
+	helpEnv();
 	else if (_str_cmp_(args[0], "setenv") == 0)
-        helpSetenv();
+	helpSetenv();
 	else if (_str_cmp_(args[0], "unsetenv") == 0)
-        helpUnsetenv();
+	helpUnsetenv();
 	else if (_str_cmp_(args[0], "help") == 0)
-        hhelp();
+	hhelp();
 	else
 		write(STDERR_FILENO, globalProgramName, _str_len_(globalProgramName));
 
 	return (0);
 }
+
