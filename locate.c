@@ -1,4 +1,7 @@
 #include "shell.h"
+
+char *get_path_copy(char * path,char *pwd,int length);
+
 /**
  * get_location - Locates a command in the PATH.
  * @command: The command to locate.
@@ -53,7 +56,7 @@ char *get_location(char *command)
 char *fill_path_dir(char *path)
 {
 	int i, length = 0;
-	char *path_copy, *pwd;
+	char *pwd;
 
 	pwd = *(_getenv("PWD")) + 4;
 	for (i = 0; path[i]; i++)
@@ -68,34 +71,48 @@ char *fill_path_dir(char *path)
 		else
 			length++;
 	}
+    return (get_path_copy(path,pwd,length));
+}
+/**
+ * get_path_copy - Creates a copy of path with any leading/sandwiched/trailing colons replaced
+ * with the current working directory
+ * @path: The colon-separated list of directories.
+ * @pwd: working directory.
+ * @length: length of the path.
+ *
+ * Return: The created copy of path
+ */
+char *get_path_copy(char *path,char *pwd,int length) {
+    int i;
+    char *path_copy;
 
-	path_copy = malloc(sizeof(char) * (length + 1));
-	if (!path_copy)
-		return (NULL);
-	path_copy[0] = '\0';
-	for (i = 0; path[i]; i++)
-	{
-		if (path[i] == ':')
-		{
-			if (i == 0)
-			{
-				_str_cat_(path_copy, pwd);
-				_str_cat_(path_copy, ":");
-			}
-			else if (path[i + 1] == ':' || path[i + 1] == '\0')
-			{
-				_str_cat_(path_copy, ":");
-				_str_cat_(path_copy, pwd);
-			}
-			else
-				_str_cat_(path_copy, ":");
-		}
-		else
-		{
-			_str_n_cat_(path_copy, &path[i], 1);
-		}
-	}
-	return (path_copy);
+    path_copy = malloc(sizeof(char) * (length + 1));
+    if (!path_copy)
+        return (NULL);
+    path_copy[0] = '\0';
+    for (i = 0; path[i]; i++)
+    {
+        if (path[i] == ':')
+        {
+            if (i == 0)
+            {
+                _str_cat_(path_copy, pwd);
+                _str_cat_(path_copy, ":");
+            }
+            else if (path[i + 1] == ':' || path[i + 1] == '\0')
+            {
+                _str_cat_(path_copy, ":");
+                _str_cat_(path_copy, pwd);
+            }
+            else
+                _str_cat_(path_copy, ":");
+        }
+        else
+        {
+            _str_n_cat_(path_copy, &path[i], 1);
+        }
+    }
+    return (path_copy);
 }
 
 /**
