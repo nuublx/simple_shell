@@ -54,7 +54,7 @@ int call_argmnts(char **args, char **front, int *exe_ret)
 		if (_str_n_cmp_(args[index], "||", 2) == 0)
 			flag = 0;
 
-		else if (_str_n_cmp(args[index], "&&", 2) == 0)
+		else if (_str_n_cmp_(args[index], "&&", 2) == 0)
 			flag = 1;
 
 		free(args[index]);
